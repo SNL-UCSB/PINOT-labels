@@ -7,7 +7,8 @@ from PIL import Image, ImageDraw, ImageFont
 # Changeable variables
 DEFAULT_FONT = "./resources/UbuntuMono-Regular.ttf"
 IMG_GENERATION_SHAPE = 600, 600
-IMG_RESULT_SHAPE = 600, 600
+IMG_RESULT_SHAPE = 590, 590
+IMG_TEMPLATE = "./resources/US-10-Empty.png"
 
 WEB_URL = "pinot.cs.ucsb.edu"
 WEB_URL_FONT_SIZE = 62
@@ -17,7 +18,7 @@ WEB_URL_COORDS = 39, 451
 PROJECT_NAME = "PINOT"
 PROJECT_FONT_SIZE = 124
 PROJECT_NAME_SHAPE = 324, 142
-PROJECT_NAME_COORDS = 7, 23
+PROJECT_NAME_COORDS = 0, 23
 
 LABEL_FONT_SIZE = 62
 LABEL_SHAPE = 541, 90
@@ -25,11 +26,11 @@ LABEL_COORDS = 39, 523
 
 QR_CODE_TEMPLATE = "https://pinot.cs.ucsb.edu/devices/{}"
 QR_SHAPE = 397, 397
-QR_COORDS = 173, 24
+QR_COORDS = 164, 30
 
 ICO_FILE = "./resources/pinot_ico.png"
 ICO_SHAPE = 80, 116
-ICO_COORDS = 40, 347
+ICO_COORDS = 33, 347
 
 FILL_COLOR = (0, 0, 0, 0)  # transparent
 MAIN_COLOR = "black"  ##(0, 0, 0, 1)    # black
@@ -100,7 +101,7 @@ def generate_label(device_id: str) -> Image:
     template.paste(device_id_img, LABEL_COORDS, mask=device_id_img)
 
     # ico image
-    ico = Image.open("./resources/pinot_ico.png")
+    ico = Image.open(ICO_FILE)
     ico = ico.resize(ICO_SHAPE)
     ico = ico.rotate(-90, expand=True)
     template.paste(ico, ICO_COORDS, mask=ico)
@@ -110,15 +111,15 @@ def generate_label(device_id: str) -> Image:
 
 def generate_lists(labels: list[Image]) -> list[Image]:
     label_reference_points = [
-        (653, 745),  (1894, 745),
-        (653, 1346), (1894, 1346),
-        (653, 1947), (1894, 1947),
-        (653, 2548), (1894, 2548),
-        (653, 3149), (1894, 3149),
+        (655, 747),  (1896, 747),
+        (655, 1348), (1896, 1348),
+        (655, 1949), (1896, 1949),
+        (655, 2550), (1896, 2550),
+        (655, 3151), (1896, 3151),
     ]
 
     lists = [
-        Image.open("./resources/US-10.png")
+        Image.open(IMG_TEMPLATE)
         for _ in range((len(labels) // 20) + (len(labels) % 20 != 0))
     ]
 
