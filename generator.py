@@ -47,8 +47,8 @@ def parse_args(args: list[str]) -> argparse.Namespace:
         
         """)
 
+    parser.add_argument("-i", "--input", help="Input file with a label on each row", required=True)
     parser.add_argument("-o", "--output", help="Output folder", default="output")
-    parser.add_argument("-i", "--input", help="Input file with a label on each row", default="input.txt")
     args = parser.parse_args(args)
     return args
 
