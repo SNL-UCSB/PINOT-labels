@@ -6,7 +6,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 # Changeable variables
 DEFAULT_FONT = "./resources/UbuntuMono-Regular.ttf"
-IMG_SHAPE = 600, 600
+IMG_GENERATION_SHAPE = 600, 600
+IMG_RESULT_SHAPE = 600, 600
 
 WEB_URL = "pinot.cs.ucsb.edu"
 WEB_URL_FONT_SIZE = 62
@@ -72,7 +73,7 @@ def generate_qr_code(device_id: str) -> Image:
 
 def generate_label(device_id: str) -> Image:
     # main canvas
-    template = Image.new("RGBA", IMG_SHAPE, FILL_COLOR)
+    template = Image.new("RGBA", IMG_GENERATION_SHAPE, FILL_COLOR)
 
     # qr code
     qr_code = generate_qr_code(device_id)
@@ -104,7 +105,7 @@ def generate_label(device_id: str) -> Image:
     ico = ico.rotate(-90, expand=True)
     template.paste(ico, ICO_COORDS, mask=ico)
 
-    return template
+    return template.resize(IMG_RESULT_SHAPE)
 
 
 def generate_lists(labels: list[Image]) -> list[Image]:
@@ -124,11 +125,11 @@ def generate_lists(labels: list[Image]) -> list[Image]:
     flip = False
     for i, label in enumerate(labels):
         rotation = -90 if flip else 90
-        shift = 0 if flip else -IMG_SHAPE[0]
+        shift = 0 if flip else -IMG_GENERATION_SHAPE[0]
 
         label = label.rotate(rotation, expand=True)
         reference_point = label_reference_points[(i // 2) % len(label_reference_points)]
-        reference_point = (reference_point[0] + shift, reference_point[1] - IMG_SHAPE[1])
+        reference_point = (reference_point[0] + shift, reference_point[1] - IMG_GENERATION_SHAPE[1])
         lists[i // 20].paste(label, reference_point, mask=label)
 
         flip = not flip
