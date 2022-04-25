@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 DEFAULT_FONT = "./resources/UbuntuMono-Regular.ttf"
 IMG_GENERATION_SHAPE = 600, 600
 IMG_RESULT_SHAPE = 590, 590
-IMG_TEMPLATE = "./resources/US-10-Empty.png"
+IMG_TEMPLATE = "./resources/US-10-Empty.png"  # Use US-10.png to fit the result and Empty for printing
 
 WEB_URL = "pinot.cs.ucsb.edu"
 WEB_URL_FONT_SIZE = 62
