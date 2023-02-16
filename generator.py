@@ -8,29 +8,30 @@ from PIL import Image, ImageDraw, ImageFont
 DEFAULT_FONT = "./resources/UbuntuMono-Regular.ttf"
 IMG_GENERATION_SHAPE = 600, 600
 IMG_RESULT_SHAPE = 590, 590
-IMG_TEMPLATE = "./resources/US-10-Empty.png"  # Use US-10.png to fit the result and Empty for printing
+IMG_TEMPLATE = "./resources/US-10.png"  # Use US-10.png to fit the result and Empty for printing
 
 WEB_URL = "pinot.cs.ucsb.edu"
 WEB_URL_FONT_SIZE = 62
 WEB_URL_SHAPE = 541, 90
-WEB_URL_COORDS = 39, 451
+WEB_URL_COORDS = 39, 411
 
 PROJECT_NAME = "PINOT"
-PROJECT_FONT_SIZE = 124
-PROJECT_NAME_SHAPE = 324, 142
-PROJECT_NAME_COORDS = 0, 23
+PROJECT_FONT_SIZE = 120
+PROJECT_NAME_SHAPE = 300, 126
+PROJECT_NAME_COORDS = 20, 23
 
 LABEL_FONT_SIZE = 62
 LABEL_SHAPE = 541, 90
-LABEL_COORDS = 39, 523
+LABEL_COORDS = 39, 473
+LABEL2_COORDS = 39, 543
 
 QR_CODE_TEMPLATE = "https://pinot.cs.ucsb.edu/devices/{}"
-QR_SHAPE = 397, 397
+QR_SHAPE = 380, 380
 QR_COORDS = 164, 30
 
 ICO_FILE = "./resources/pinot_ico.png"
 ICO_SHAPE = 80, 116
-ICO_COORDS = 33, 347
+ICO_COORDS = 37, 327
 
 FILL_COLOR = (0, 0, 0, 0)  # transparent
 MAIN_COLOR = "black"  ##(0, 0, 0, 1)    # black
@@ -98,7 +99,9 @@ def generate_label(device_id: str) -> Image:
 
     # device id
     device_id_img = text_generator(LABEL_SHAPE, device_id, LABEL_FONT_SIZE)
-    template.paste(device_id_img, LABEL_COORDS, mask=device_id_img)
+    template.paste(device_id_img, LABEL_COORDS, mask=device_id_img)  # to be located on the cap
+    template.paste(device_id_img, LABEL2_COORDS, mask=device_id_img)  # to be located on the device
+
 
     # ico image
     ico = Image.open(ICO_FILE)
